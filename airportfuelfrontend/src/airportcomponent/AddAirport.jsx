@@ -31,7 +31,7 @@ class AddAirport extends Component {
         }
         
         
-        else if(!(/^\d+$/.test(this.state.fuel_available)) || (/^\d+$/.test(this.state.fuel_available)))
+        else if(!(/^\d+$/.test(this.state.fuel_available)) || !(/^\d+$/.test(this.state.fuel_capacity)))
             {
                 this.setState({ isFailed: true,
                     message:'Should be a number only'})
