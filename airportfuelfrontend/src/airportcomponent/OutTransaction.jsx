@@ -24,29 +24,39 @@ class OutTransaction extends Component {
     }
 
     handleSubmit = async (event) => {
-        console.log(this.state.airport_name);
-        // event.preventDefault();
-        if(this.state.airport_name === '' || this.state.aircraft_name === '' || this.state.quantity == 0 )
+       
+        event.preventDefault();
+        if(this.state.airport_name === '' || this.state.aircraft_name === ''  )
         {
             this.setState({ isFailed: true})
             
         }
+        else if(!(/^\d+$/.test(this.state.quantity)))
+            {
+                this.setState({ isFailed: true,
+                    message:'Should be a number only'})
+            }
+        else if(this.state.quantity <= 0)
+        {
+            this.setState({ isFailed: true,
+            message:'Quantity should be greater than 0'})
+        }
+        else{
        
-            const response = await outtransaction(this.state.airport_name, this.state.aircraft_no, this.state.quantity);   
-        
-
-            // event.preventDefault();   
+            const response = await outtransaction(this.state.airport_name, this.state.aircraft_no, this.state.quantity);    
                 if(response.status == 200)
                 {
                     this.props.history.push('/sucess');
                     this.setState({ isFailed: false})
                 }
                 else{
-                    this.props.history.push('/out_transaction');
+                    console.log(response);
+                    // this.props.history.push('/out_transaction');
                     this.setState({ isFailed: true, message: response.data.error
                         })
                 }
-        event.preventDefault();
+            }
+        // event.preventDefault();
       
     }
 

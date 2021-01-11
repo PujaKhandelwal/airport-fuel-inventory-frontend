@@ -24,13 +24,28 @@ class AddAirport extends Component {
     handleSubmit = async (event) => {
         event.preventDefault();
         if(this.state.airport_name === '' )  this.setState({ isFailed: true})
-        const response = await addAirport(this.state.airport_name, this.state.fuel_available, this.state.fuel_capacity);   
+
+        else if(this.state.fuel_available<=0 || this.state.fuel_capacity<=0){
+            this.setState({ isFailed: true,
+                message:'Should be greater than 0'})
+        }
+        
+        
+        else if(!(/^\d+$/.test(this.state.fuel_available)) || (/^\d+$/.test(this.state.fuel_available)))
+            {
+                this.setState({ isFailed: true,
+                    message:'Should be a number only'})
+            }
+            else{
+                
+        const response = await addAirport(this.state.airport_name, this.state.fuel_available, this.state.fuel_capacity);  
         if(response.status == 200){
                 this.props.history.push('/sucess');
                 this.setState({ isFailed: false}) }
         else{
                 this.props.history.push('/add_airport');
                 this.setState({ isFailed: true, message: response.data.error })}
+        }
         event.preventDefault(); }
 
     render() { 

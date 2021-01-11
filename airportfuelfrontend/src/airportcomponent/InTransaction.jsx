@@ -28,19 +28,26 @@ class InTransaction extends Component {
             {
                 this.setState({ isFailed: true, message: 'Quantity should be greater than zero'}) 
             }
+            else if(!(/^\d+$/.test(this.state.quantity)))
+            {
+                this.setState({ isFailed: true,
+                    message:'Should be a number only'})
+            }
+            
             else{
             const response = await intransaction(this.state.airport_name, this.state.quantity);   
-            console.log(response.data);  
+            console.log(response);  
                 if(response.status == 200){
+                    
                     this.props.history.push('/sucess');
                     this.setState({ isFailed: false})}
                 else{
-                    this.props.history.push('/in_transaction');
+                   
                     this.setState({ isFailed: true, message: response.data.error
                         })
                 }
             }
-        event.preventDefault();
+        // event.preventDefault();
     }
 
     render() { 
