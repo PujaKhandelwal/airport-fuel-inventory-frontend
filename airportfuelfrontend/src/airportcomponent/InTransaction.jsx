@@ -23,6 +23,12 @@ class InTransaction extends Component {
         event.preventDefault();
         if(this.state.airport_name === ''){
             this.setState({ isFailed: true}) }
+
+            else if(this.state.quantity <= 0)
+            {
+                this.setState({ isFailed: true, message: 'Quantity should be greater than zero'}) 
+            }
+            else{
             const response = await intransaction(this.state.airport_name, this.state.quantity);   
             console.log(response.data);  
                 if(response.status == 200){
@@ -33,6 +39,7 @@ class InTransaction extends Component {
                     this.setState({ isFailed: true, message: response.data.error
                         })
                 }
+            }
         event.preventDefault();
     }
 
