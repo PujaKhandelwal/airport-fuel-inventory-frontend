@@ -40,9 +40,7 @@ Frontend for Airport Fuel Inventory
 ### 8. Report
   Report is used to display the Airport Summary and Fuel Consumption.
   
-### Default Login Credential: 
-UserName: puja.khandelwal1997@gmail.com
-Password: puja1234
+
    
 
 
