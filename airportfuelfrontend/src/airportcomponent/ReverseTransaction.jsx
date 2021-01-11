@@ -76,7 +76,7 @@ class ReverseTransaction extends Component {
                 <Welcome/>
                 <br/>
                 <br/>
-                <div className='example1'>
+                <div className='example2'>
                 <br/>
            <div>
                 <h3><b>Reverse The Transactions Done</b></h3>

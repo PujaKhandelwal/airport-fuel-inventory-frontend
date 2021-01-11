@@ -31,6 +31,13 @@ class WelcomeSignin extends Component {
             this.setState({ isFailed: true})
             
         }
+        else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(this.state.username))
+            {
+                this.setState({ 
+                    isFailed: true,
+                    message:'Should be valid Username'
+                    }) 
+            }
         else if(this.state.password.length < 6 || this.state.password > 16)
         {
             this.setState({ 
@@ -38,13 +45,13 @@ class WelcomeSignin extends Component {
                 message:'length should be between (6-16)'
                 })  
             }
-        // else if(!(/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/).test(this.state.password))
-        // {
-        //     this.setState({
-        //         isFailed: true,
-        //         message: 'should contain |A-Z|a-z|0-9|!@#$%^&*|'
-        //     })
-        // }
+        else if(!(/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/).test(this.state.password))
+        {
+            this.setState({
+                isFailed: true,
+                message: 'should contain |A-Z|a-z|0-9|!@#$%^&*|'
+            })
+        }
         else
         {
             console.log("checked for username nd password from db");

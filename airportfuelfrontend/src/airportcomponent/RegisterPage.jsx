@@ -29,6 +29,36 @@ class RegisterPage extends Component {
         handleSubmit= async(event) => {
             event.preventDefault();
             console.log("checked for username nd password from db");
+            if(this.state.name === '' || this.state.password === '' || this.state.email === '')
+        {
+            this.setState({ isFailed: true})
+            
+        }
+        else if(this.state.password.length < 6 || this.state.password > 16)
+        {
+            this.setState({ 
+                isFailed: true,
+                message:'length should be between (6-16)'
+                })  
+            }
+            else if(!(/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/).test(this.state.password))
+        {
+            this.setState({
+                isFailed: true,
+                message: 'should contain |A-Z|a-z|0-9|!@#$%^&*|'
+            })
+        }
+        else if(!(/^[A-Za-z]+$/).test(this.state.name))
+        {
+            this.setState({
+                isFailed: true,
+                message: 'should contain a proper name'
+            })
+        }
+
+            else{
+
+
             const response = await signUpUser(this.state.name, this.state.email, this.state.password);  
             if(response.status == 200)
             {
@@ -40,6 +70,7 @@ class RegisterPage extends Component {
                 this.setState({ isFailed: true, message: response.data.error
                     })
             }
+        }
             
         }
     render() { 
