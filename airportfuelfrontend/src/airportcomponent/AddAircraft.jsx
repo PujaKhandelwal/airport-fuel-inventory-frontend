@@ -25,7 +25,21 @@ class AddAircraft extends Component {
     handleSubmit = async (event) => {
         event.preventDefault();
         if(this.state.aircraft_no === '' || this.state.airline === '' || this.state.source === '' || this.state.destination === '')
-            this.setState({ isFailed: true})
+{
+            this.setState({ isFailed: true})}
+
+            else if(this.state.source.toUpperCase() === this.state.destination.toUpperCase())
+            {
+                this.setState({ isFailed: true,
+                    message:'Source and destination cannot be same'
+                })
+            }
+            else{
+
+
+
+
+
             const response = await addAircraft(this.state.aircraft_no, this.state.airline, this.state.source, this.state.destination);   
                 if(response.status == 200){                
                     this.props.history.push('/sucess');
@@ -34,8 +48,10 @@ class AddAircraft extends Component {
                     this.props.history.push('/add_aircraft');
                     this.setState({ isFailed: true, message: response.data.error
                         })}
-        event.preventDefault();
+        
     }
+   
+}
 
     render() { 
         
